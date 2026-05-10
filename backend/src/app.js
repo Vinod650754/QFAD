@@ -17,17 +17,9 @@ dotenv.config();
 
 const app = express();
 
+app.use(cors());
+app.use(express.json());
 app.use(helmet());
-app.use(
-  cors({
-    origin: [
-      "https://qfad-nl9cqpdg7-vinod650754s-projects.vercel.app",
-      "https://qfad.vercel.app"
-    ],
-    credentials: true,
-  })
-);
-app.use(express.json({ limit: "1mb" }));
 app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, limit: 300 }));
 
