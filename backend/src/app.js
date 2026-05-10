@@ -28,7 +28,16 @@ app.use(express.json({ limit: "1mb" }));
 app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, limit: 300 }));
 
-app.get("/health", (req, res) => res.json({ ok: true, service: "question-of-the-day-api" }));
+app.get("/", (req, res) => {
+  res.json({
+    message: "Backend API Running Successfully"
+  });
+});
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok"
+  });
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/questions", questionRoutes);
 app.use("/api/answers", answerRoutes);
