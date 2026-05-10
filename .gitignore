@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.local
+npm-debug.log*
+.DS_Store
+coverage/
+backend/uploads/*
+!backend/uploads/.gitkeep

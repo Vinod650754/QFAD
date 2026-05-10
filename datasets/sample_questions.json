@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Python Lists",
+    "question": "Which Python method adds an item to the end of a list?",
+    "category": "Coding",
+    "topic": "Python Lists",
+    "difficulty": "Easy",
+    "options": ["append()", "pop()", "sort()", "index()"],
+    "answer": "append()",
+    "explanation": "append() adds a single item to the end of a Python list."
+  },
+  {
+    "title": "Synonyms",
+    "question": "Choose the closest synonym of 'brief'.",
+    "category": "English",
+    "topic": "Vocabulary",
+    "difficulty": "Easy",
+    "options": ["short", "heavy", "ancient", "silent"],
+    "answer": "short",
+    "explanation": "Brief means short in duration or length."
+  }
+]

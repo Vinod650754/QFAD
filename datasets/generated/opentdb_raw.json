@@ -1,0 +1,242 @@
+[
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Art",
+    "question": "Which artist&#039;s style was to use small different colored dots to create a picture?",
+    "correct_answer": "Georges Seurat",
+    "incorrect_answers": [
+      "Paul C&eacute;zanne",
+      "Vincent Van Gogh",
+      "Henri Rousseau"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Entertainment: Television",
+    "question": "What year was Netflix founded?",
+    "correct_answer": "1997",
+    "incorrect_answers": [
+      "1999",
+      "2004",
+      "2001"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "Science &amp; Nature",
+    "question": "Naturally occuring uranium primarily consists of which isotope?",
+    "correct_answer": "238",
+    "incorrect_answers": [
+      "235",
+      "239",
+      "233"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "Entertainment: Video Games",
+    "question": "In the video game &quot;Metal Gear Solid&quot;, what did Revolver Ocelot consider the greatest handgun ever made?",
+    "correct_answer": "Colt Single Action Army",
+    "incorrect_answers": [
+      "Colt Python",
+      "Colt M1892",
+      "Colt 1851 Navy Revolver"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "Entertainment: Video Games",
+    "question": "Aperture Science CEO Cave Johnson is voiced by which American actor?",
+    "correct_answer": "J.K. Simmons",
+    "incorrect_answers": [
+      "Nolan North",
+      "John Patrick Lowrie",
+      "Christopher Lloyd"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Sports",
+    "question": "Which of the following player scored a hat-trick during their Manchester United debut?",
+    "correct_answer": "Wayne Rooney",
+    "incorrect_answers": [
+      "Cristiano Ronaldo",
+      "Robin Van Persie",
+      "David Beckham"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Science: Computers",
+    "question": "Moore&#039;s law originally stated that the number of transistors on a microprocessor chip would double every...",
+    "correct_answer": "Year",
+    "incorrect_answers": [
+      "Four Years",
+      "Two Years",
+      "Eight Years"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "In what year did William the Conqueror take control of England?",
+    "correct_answer": "1066",
+    "incorrect_answers": [
+      "1123",
+      "1205",
+      "901"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "General Knowledge",
+    "question": "A criminal who has &ldquo;cooked the books&rdquo; has engaged in what kind of illegal behavior?",
+    "correct_answer": "Accounting Fraud",
+    "incorrect_answers": [
+      "Money Laundering",
+      "Extortion",
+      "Blackmail"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Entertainment: Video Games",
+    "question": "Who is the protagonist in Dead Rising 3?",
+    "correct_answer": "Nick Ramos",
+    "incorrect_answers": [
+      "Frank West",
+      "Chuck Greene",
+      "Isabela Keyes"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "Entertainment: Film",
+    "question": "In the movie &quot;Scream&quot; who is Ghost Face?",
+    "correct_answer": "Billy Loomis and Stu Macher",
+    "incorrect_answers": [
+      "Dewey Riley",
+      "Sidney Prescott",
+      "Archie Prescott and Philip Marv"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "Entertainment: Music",
+    "question": "Who wrote the Sinead O`Connor hit &#039;Nothing Compares 2 U&#039;?",
+    "correct_answer": "Prince",
+    "incorrect_answers": [
+      "Michael Jackson",
+      "Cameo",
+      "Rick James"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Entertainment: Comics",
+    "question": "In Marvel Comics, Taurus is the founder and leader of which criminal organization?",
+    "correct_answer": "Zodiac",
+    "incorrect_answers": [
+      "Scorpio",
+      "Tiger Mafia",
+      "The Union"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "What is widely considered to be the oldest civilization known to mankind?",
+    "correct_answer": "Sumeria",
+    "incorrect_answers": [
+      "Babylon",
+      "Assyria",
+      "Phoenicia"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "Geography",
+    "question": "Which of these is an official currency of the Cook Islands?",
+    "correct_answer": "New Zealand Dollar",
+    "incorrect_answers": [
+      "United States Dollar",
+      "British Pound",
+      "Australian Dollar"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "Kuala Lumpur is the capital of which country?",
+    "correct_answer": "Malaysia",
+    "incorrect_answers": [
+      "Indonesia",
+      "Singapore",
+      "Thailand"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "Entertainment: Film",
+    "question": "In the &quot;Jurassic Park&quot; universe, what was the first dinosaur cloned by InGen in 1986?",
+    "correct_answer": "Velociraptor",
+    "incorrect_answers": [
+      "Triceratops",
+      "Troodon",
+      "Brachiosaurus"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "Entertainment: Music",
+    "question": "Which Nirvana album had a naked baby on the cover?",
+    "correct_answer": "Nevermind",
+    "incorrect_answers": [
+      "Bleach",
+      "In Utero",
+      "Incesticide"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Entertainment: Film",
+    "question": "Which documentary film maker wrote and starred in the film &quot;My Scientology Movie&quot; which first debuted in 2015?",
+    "correct_answer": "Louis Theroux",
+    "incorrect_answers": [
+      "Errol Morris",
+      "Joe Berlinger",
+      "Adam Curtis"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "Geography",
+    "question": "Which of these island countries is located in the Caribbean?",
+    "correct_answer": "Barbados",
+    "incorrect_answers": [
+      "Fiji",
+      "Maldives",
+      "Seychelles"
+    ]
+  }
+]

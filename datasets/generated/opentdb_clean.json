@@ -1,0 +1,322 @@
+[
+  {
+    "title": "Which artist's style was to use small different colored dots to create",
+    "question": "Which artist's style was to use small different colored dots to create a picture?",
+    "options": [
+      "Paul C&eacute;zanne",
+      "Vincent Van Gogh",
+      "Henri Rousseau",
+      "Georges Seurat"
+    ],
+    "answer": "Georges Seurat",
+    "explanation": "Correct answer: Georges Seurat",
+    "topic": "Art",
+    "category": "GK",
+    "difficulty": "Medium",
+    "source": "opentdb"
+  },
+  {
+    "title": "What year was Netflix founded?",
+    "question": "What year was Netflix founded?",
+    "options": [
+      "1999",
+      "2004",
+      "2001",
+      "1997"
+    ],
+    "answer": "1997",
+    "explanation": "Correct answer: 1997",
+    "topic": "Television",
+    "category": "GK",
+    "difficulty": "Medium",
+    "source": "opentdb"
+  },
+  {
+    "title": "Naturally occuring uranium primarily consists of which isotope?",
+    "question": "Naturally occuring uranium primarily consists of which isotope?",
+    "options": [
+      "235",
+      "239",
+      "233",
+      "238"
+    ],
+    "answer": "238",
+    "explanation": "Correct answer: 238",
+    "topic": "Science &amp; Nature",
+    "category": "Science",
+    "difficulty": "Easy",
+    "source": "opentdb"
+  },
+  {
+    "title": "In the video game \"Metal Gear Solid\", what did Revolver Ocelot conside",
+    "question": "In the video game \"Metal Gear Solid\", what did Revolver Ocelot consider the greatest handgun ever made?",
+    "options": [
+      "Colt Python",
+      "Colt M1892",
+      "Colt 1851 Navy Revolver",
+      "Colt Single Action Army"
+    ],
+    "answer": "Colt Single Action Army",
+    "explanation": "Correct answer: Colt Single Action Army",
+    "topic": "Video Games",
+    "category": "GK",
+    "difficulty": "Hard",
+    "source": "opentdb"
+  },
+  {
+    "title": "Aperture Science CEO Cave Johnson is voiced by which American actor?",
+    "question": "Aperture Science CEO Cave Johnson is voiced by which American actor?",
+    "options": [
+      "Nolan North",
+      "John Patrick Lowrie",
+      "Christopher Lloyd",
+      "J.K. Simmons"
+    ],
+    "answer": "J.K. Simmons",
+    "explanation": "Correct answer: J.K. Simmons",
+    "topic": "Video Games",
+    "category": "GK",
+    "difficulty": "Easy",
+    "source": "opentdb"
+  },
+  {
+    "title": "Which of the following player scored a hat-trick during their Manchest",
+    "question": "Which of the following player scored a hat-trick during their Manchester United debut?",
+    "options": [
+      "Cristiano Ronaldo",
+      "Robin Van Persie",
+      "David Beckham",
+      "Wayne Rooney"
+    ],
+    "answer": "Wayne Rooney",
+    "explanation": "Correct answer: Wayne Rooney",
+    "topic": "Sports",
+    "category": "GK",
+    "difficulty": "Medium",
+    "source": "opentdb"
+  },
+  {
+    "title": "Moore's law originally stated that the number of transistors on a micr",
+    "question": "Moore's law originally stated that the number of transistors on a microprocessor chip would double every...",
+    "options": [
+      "Four Years",
+      "Two Years",
+      "Eight Years",
+      "Year"
+    ],
+    "answer": "Year",
+    "explanation": "Correct answer: Year",
+    "topic": "Computers",
+    "category": "Coding",
+    "difficulty": "Medium",
+    "source": "opentdb"
+  },
+  {
+    "title": "In what year did William the Conqueror take control of England?",
+    "question": "In what year did William the Conqueror take control of England?",
+    "options": [
+      "1123",
+      "1205",
+      "901",
+      "1066"
+    ],
+    "answer": "1066",
+    "explanation": "Correct answer: 1066",
+    "topic": "History",
+    "category": "GK",
+    "difficulty": "Medium",
+    "source": "opentdb"
+  },
+  {
+    "title": "A criminal who has &ldquo;cooked the books&rdquo; has engaged in what",
+    "question": "A criminal who has &ldquo;cooked the books&rdquo; has engaged in what kind of illegal behavior?",
+    "options": [
+      "Money Laundering",
+      "Extortion",
+      "Blackmail",
+      "Accounting Fraud"
+    ],
+    "answer": "Accounting Fraud",
+    "explanation": "Correct answer: Accounting Fraud",
+    "topic": "General Knowledge",
+    "category": "GK",
+    "difficulty": "Easy",
+    "source": "opentdb"
+  },
+  {
+    "title": "Who is the protagonist in Dead Rising 3?",
+    "question": "Who is the protagonist in Dead Rising 3?",
+    "options": [
+      "Frank West",
+      "Chuck Greene",
+      "Isabela Keyes",
+      "Nick Ramos"
+    ],
+    "answer": "Nick Ramos",
+    "explanation": "Correct answer: Nick Ramos",
+    "topic": "Video Games",
+    "category": "GK",
+    "difficulty": "Medium",
+    "source": "opentdb"
+  },
+  {
+    "title": "In the movie \"Scream\" who is Ghost Face?",
+    "question": "In the movie \"Scream\" who is Ghost Face?",
+    "options": [
+      "Dewey Riley",
+      "Sidney Prescott",
+      "Archie Prescott and Philip Marv",
+      "Billy Loomis and Stu Macher"
+    ],
+    "answer": "Billy Loomis and Stu Macher",
+    "explanation": "Correct answer: Billy Loomis and Stu Macher",
+    "topic": "Film",
+    "category": "GK",
+    "difficulty": "Hard",
+    "source": "opentdb"
+  },
+  {
+    "title": "Who wrote the Sinead O`Connor hit 'Nothing Compares 2 U'?",
+    "question": "Who wrote the Sinead O`Connor hit 'Nothing Compares 2 U'?",
+    "options": [
+      "Michael Jackson",
+      "Cameo",
+      "Rick James",
+      "Prince"
+    ],
+    "answer": "Prince",
+    "explanation": "Correct answer: Prince",
+    "topic": "Music",
+    "category": "GK",
+    "difficulty": "Easy",
+    "source": "opentdb"
+  },
+  {
+    "title": "In Marvel Comics, Taurus is the founder and leader of which criminal o",
+    "question": "In Marvel Comics, Taurus is the founder and leader of which criminal organization?",
+    "options": [
+      "Scorpio",
+      "Tiger Mafia",
+      "The Union",
+      "Zodiac"
+    ],
+    "answer": "Zodiac",
+    "explanation": "Correct answer: Zodiac",
+    "topic": "Comics",
+    "category": "GK",
+    "difficulty": "Medium",
+    "source": "opentdb"
+  },
+  {
+    "title": "What is widely considered to be the oldest civilization known to manki",
+    "question": "What is widely considered to be the oldest civilization known to mankind?",
+    "options": [
+      "Babylon",
+      "Assyria",
+      "Phoenicia",
+      "Sumeria"
+    ],
+    "answer": "Sumeria",
+    "explanation": "Correct answer: Sumeria",
+    "topic": "History",
+    "category": "GK",
+    "difficulty": "Easy",
+    "source": "opentdb"
+  },
+  {
+    "title": "Which of these is an official currency of the Cook Islands?",
+    "question": "Which of these is an official currency of the Cook Islands?",
+    "options": [
+      "United States Dollar",
+      "British Pound",
+      "Australian Dollar",
+      "New Zealand Dollar"
+    ],
+    "answer": "New Zealand Dollar",
+    "explanation": "Correct answer: New Zealand Dollar",
+    "topic": "Geography",
+    "category": "GK",
+    "difficulty": "Hard",
+    "source": "opentdb"
+  },
+  {
+    "title": "Kuala Lumpur is the capital of which country?",
+    "question": "Kuala Lumpur is the capital of which country?",
+    "options": [
+      "Indonesia",
+      "Singapore",
+      "Thailand",
+      "Malaysia"
+    ],
+    "answer": "Malaysia",
+    "explanation": "Correct answer: Malaysia",
+    "topic": "Geography",
+    "category": "GK",
+    "difficulty": "Medium",
+    "source": "opentdb"
+  },
+  {
+    "title": "In the \"Jurassic Park\" universe, what was the first dinosaur cloned by",
+    "question": "In the \"Jurassic Park\" universe, what was the first dinosaur cloned by InGen in 1986?",
+    "options": [
+      "Triceratops",
+      "Troodon",
+      "Brachiosaurus",
+      "Velociraptor"
+    ],
+    "answer": "Velociraptor",
+    "explanation": "Correct answer: Velociraptor",
+    "topic": "Film",
+    "category": "GK",
+    "difficulty": "Hard",
+    "source": "opentdb"
+  },
+  {
+    "title": "Which Nirvana album had a naked baby on the cover?",
+    "question": "Which Nirvana album had a naked baby on the cover?",
+    "options": [
+      "Bleach",
+      "In Utero",
+      "Incesticide",
+      "Nevermind"
+    ],
+    "answer": "Nevermind",
+    "explanation": "Correct answer: Nevermind",
+    "topic": "Music",
+    "category": "GK",
+    "difficulty": "Easy",
+    "source": "opentdb"
+  },
+  {
+    "title": "Which documentary film maker wrote and starred in the film \"My Sciento",
+    "question": "Which documentary film maker wrote and starred in the film \"My Scientology Movie\" which first debuted in 2015?",
+    "options": [
+      "Errol Morris",
+      "Joe Berlinger",
+      "Adam Curtis",
+      "Louis Theroux"
+    ],
+    "answer": "Louis Theroux",
+    "explanation": "Correct answer: Louis Theroux",
+    "topic": "Film",
+    "category": "GK",
+    "difficulty": "Medium",
+    "source": "opentdb"
+  },
+  {
+    "title": "Which of these island countries is located in the Caribbean?",
+    "question": "Which of these island countries is located in the Caribbean?",
+    "options": [
+      "Fiji",
+      "Maldives",
+      "Seychelles",
+      "Barbados"
+    ],
+    "answer": "Barbados",
+    "explanation": "Correct answer: Barbados",
+    "topic": "Geography",
+    "category": "GK",
+    "difficulty": "Hard",
+    "source": "opentdb"
+  }
+]
