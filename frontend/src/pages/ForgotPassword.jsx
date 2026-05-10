@@ -9,7 +9,7 @@ export default function ForgotPassword() {
   const submit = async (event) => {
     event.preventDefault();
     try {
-      await api.post("/auth/forgot-password", { email });
+      await api.post("/api/auth/forgot-password", { email });
       toast.success("Check your inbox if the account exists");
     } catch (error) {
       toast.error(error.message);

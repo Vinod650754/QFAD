@@ -15,21 +15,21 @@ export const AuthProvider = ({ children }) => {
     }
 
     api
-      .get("/auth/me")
+      .get("/api/auth/me")
       .then(({ data }) => setUser(data.user))
       .catch(() => localStorage.removeItem("qotd_token"))
       .finally(() => setLoading(false));
   }, []);
 
   const login = async (email, password) => {
-    const { data } = await api.post("/auth/login", { email, password });
+    const { data } = await api.post("/api/auth/login", { email, password });
     localStorage.setItem("qotd_token", data.token);
     setUser(data.user);
     return data.user;
   };
 
   const signup = async (payload) => {
-    const { data } = await api.post("/auth/signup", payload);
+    const { data } = await api.post("/api/auth/signup", payload);
     localStorage.setItem("qotd_token", data.token);
     setUser(data.user);
     return data.user;

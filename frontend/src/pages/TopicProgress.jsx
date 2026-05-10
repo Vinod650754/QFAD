@@ -7,7 +7,7 @@ export default function TopicProgress() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    api.get("/recommendations/topics").then(({ data }) => setData(data));
+    api.get("/api/recommendations/topics").then(({ data }) => setData(data));
   }, []);
 
   if (!data) return <Skeleton rows={6} />;

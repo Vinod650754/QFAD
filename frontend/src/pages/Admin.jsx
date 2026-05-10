@@ -27,7 +27,7 @@ export default function Admin() {
   const [dataset, setDataset] = useState(null);
 
   const load = () => {
-    Promise.all([api.get("/admin/analytics"), api.get("/admin/users"), api.get("/questions")]).then(([a, u, q]) => {
+    Promise.all([api.get("/api/admin/analytics"), api.get("/api/admin/users"), api.get("/api/questions")]).then(([a, u, q]) => {
       setAnalytics(a.data);
       setUsers(u.data.users);
       setQuestions(q.data.questions);
@@ -39,7 +39,7 @@ export default function Admin() {
   const createQuestion = async (event) => {
     event.preventDefault();
     try {
-      await api.post("/questions", {
+      await api.post("/api/questions", {
         ...form,
         options: form.options.split(",").map((option) => option.trim()).filter(Boolean),
         scheduledFor: new Date(form.scheduledFor)
@@ -53,7 +53,7 @@ export default function Admin() {
   };
 
   const resetStreak = async (id) => {
-    await api.post(`/admin/users/${id}/reset-streak`);
+    await api.post(`/api/admin/users/${id}/reset-streak`);
     toast.success("Streak reset");
   };
 
@@ -63,7 +63,7 @@ export default function Admin() {
     const body = new FormData();
     body.append("dataset", dataset);
     try {
-      const { data } = await api.post("/datasets/import", body, {
+      const { data } = await api.post("/api/datasets/import", body, {
         headers: { "Content-Type": "multipart/form-data" }
       });
       toast.success(`Imported ${data.imported} questions`);

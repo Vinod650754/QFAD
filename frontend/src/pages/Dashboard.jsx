@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    Promise.all([api.get("/users/profile"), api.get("/users/notifications")]).then(([p, n]) => {
+    Promise.all([api.get("/api/users/profile"), api.get("/api/users/notifications")]).then(([p, n]) => {
       setProfile(p.data);
       setNotifications(n.data.notifications);
     });

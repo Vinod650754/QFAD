@@ -7,7 +7,7 @@ export default function Leaderboard() {
   const [users, setUsers] = useState(null);
 
   useEffect(() => {
-    api.get("/users/leaderboard").then(({ data }) => setUsers(data.users));
+    api.get("/api/users/leaderboard").then(({ data }) => setUsers(data.users));
   }, []);
 
   if (!users) return <Skeleton rows={6} />;

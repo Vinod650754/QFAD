@@ -11,7 +11,7 @@ export default function Profile() {
   const [form, setForm] = useState({ name: "", avatarColor: "#14b8a6" });
 
   useEffect(() => {
-    api.get("/users/profile").then(({ data }) => {
+    api.get("/api/users/profile").then(({ data }) => {
       setProfile(data);
       setForm({ name: data.user.name, avatarColor: data.user.avatarColor || "#14b8a6" });
     });
@@ -20,7 +20,7 @@ export default function Profile() {
   const save = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await api.put("/users/profile", form);
+      const { data } = await api.put("/api/users/profile", form);
       setUser({ ...user, ...data.user });
       toast.success("Profile saved");
     } catch (error) {

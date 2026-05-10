@@ -22,7 +22,7 @@ export default function DailyQuestion() {
         setSeconds(data.question.timeLimitSeconds || 300);
       })
       .catch(() => {
-        api.get("/questions/daily").then(({ data }) => {
+        api.get("/api/questions/daily").then(({ data }) => {
           setData(data);
           setSeconds(data.question.timeLimitSeconds || 300);
         }).catch((error) => toast.error(error.message));
@@ -44,7 +44,7 @@ export default function DailyQuestion() {
     event.preventDefault();
     try {
       const elapsed = (question.timeLimitSeconds || 300) - seconds;
-      const response = await api.post("/answers", { questionId: question._id, answer, timeSpentSeconds: elapsed });
+      const response = await api.post("/api/answers", { questionId: question._id, answer, timeSpentSeconds: elapsed });
       setResult(response.data);
       setUser((user) => user ? { ...user, xp: user.xp + response.data.xpEarned, badges: response.data.badges } : user);
       if (response.data.isCorrect) confetti({ particleCount: 120, spread: 70, origin: { y: 0.7 } });

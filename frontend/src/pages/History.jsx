@@ -6,7 +6,7 @@ export default function History() {
   const [answers, setAnswers] = useState(null);
 
   useEffect(() => {
-    api.get("/answers/history").then(({ data }) => setAnswers(data.answers));
+    api.get("/api/answers/history").then(({ data }) => setAnswers(data.answers));
   }, []);
 
   if (!answers) return <Skeleton rows={5} />;
