@@ -2,12 +2,7 @@
 
 FastAPI recommendation service for Question For The Day.
 
-The first production version uses a lightweight Scikit-learn recommendation approach instead of deep learning:
-
-- User performance features: accuracy, weak topics, average time, solved difficulty, streak
-- Candidate question features: topic, category, difficulty
-- RandomForest models for difficulty and topic assistance
-- Hybrid weak-topic priority for reliable adaptive behavior
+This service is split into local training and deployment. The deployed API loads a trained model from `models/model.pkl` only and does not train during startup.
 
 ## Run Locally
 
@@ -16,38 +11,42 @@ cd ml-service
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
+python train.py
+uvicorn app:app --host 0.0.0.0 --port 10000
 ```
 
 Health check:
 
 ```bash
-curl http://localhost:8000/health
+curl http://localhost:10000/health
 ```
 
 Train model:
 
 ```bash
-python -m scripts.train
+python train.py
 ```
 
 Test predictions:
 
 ```bash
-python -m scripts.test_predictions
+python test_predictions.py
 ```
 
 API endpoints:
 
 - `GET /health`
 - `POST /predict`
-- `POST /train`
-- `POST /recommend` compatibility endpoint
 
-## Deploy on Render
+## Render Deployment
 
 - Root directory: `ml-service`
 - Build command: `pip install -r requirements.txt`
-- Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+- Start command: `uvicorn app:app --host 0.0.0.0 --port 10000`
 
-Set backend `ML_SERVICE_URL` to the deployed ML URL.
+### Render best practices
+
+- Use `python-3.11.9` in `runtime.txt`.
+- Do not train on Render.
+- Run `python train.py` locally and commit `models/model.pkl` before deployment.
+- Ensure `models/model.pkl` exists in the repository or the deployment will return `503` for `/predict`.
