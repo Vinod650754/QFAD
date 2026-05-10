@@ -20,8 +20,11 @@ const app = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL?.split(",") || "http://localhost:5173",
-    credentials: true
+    origin: [
+      "https://qfad-nl9cqpdg7-vinod650754s-projects.vercel.app",
+      "https://qfad.vercel.app"
+    ],
+    credentials: true,
   })
 );
 app.use(express.json({ limit: "1mb" }));
