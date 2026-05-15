@@ -1,13 +1,21 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
-  timeout: 12000
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
+  timeout: 12000,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json"
+  }
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("qotd_token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
+  try {
+    const token = window.localStorage.getItem("qotd_token");
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+  } catch {
+    // localStorage unavailable in some browser privacy modes
+  }
   return config;
 });
 

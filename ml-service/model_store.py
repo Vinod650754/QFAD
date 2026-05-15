@@ -145,7 +145,8 @@ def load_model(path: Path = MODEL_PATH) -> Dict:
 
 def predict_payload(payload: Dict, bundle: Dict) -> Dict:
     topic_encoder = bundle["topic_encoder"]
-    vector = feature_vector(payload, topic_encoder).reshape(1, -1)
+    payload_dict = payload.dict() if hasattr(payload, "dict") else payload
+    vector = feature_vector(payload_dict, topic_encoder).reshape(1, -1)
 
     difficulty_model = bundle["difficulty_model"]
     topic_model = bundle["topic_model"]
@@ -157,7 +158,7 @@ def predict_payload(payload: Dict, bundle: Dict) -> Dict:
     topic_confidence = float(np.max(topic_model.predict_proba(vector)[0]))
 
     recommended_topic = (
-        (payload.get("weak_topics") or [None])[0]
+        (payload_dict.get("weak_topics") or [None])[0]
         or str(topic_encoder.inverse_transform([topic_index])[0])
     )
 

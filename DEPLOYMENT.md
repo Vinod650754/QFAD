@@ -4,10 +4,12 @@
 
 Set these environment variables in Vercel Dashboard:
 ```
-VITE_API_URL=https://qfad.onrender.com/api
+VITE_API_URL=https://qfad.onrender.com
 ```
 
-The frontend will use this URL to make all API calls when deployed to Vercel.
+The frontend will use this URL as the base and append `/api/auth/login`, `/api/users/profile`, etc.
+All requests will automatically be prefixed with `/api/` by the frontend code.
+
 
 ---
 

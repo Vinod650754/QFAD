@@ -16,16 +16,22 @@ export default function DailyQuestion() {
 
   useEffect(() => {
     api
-      .get("/recommendations/next")
+      .get("/api/recommendations/next")
       .then(({ data }) => {
         setData({ question: data.question, recommendationReason: data.reason, answered: false });
         setSeconds(data.question.timeLimitSeconds || 300);
       })
-      .catch(() => {
-        api.get("/api/questions/daily").then(({ data }) => {
-          setData(data);
-          setSeconds(data.question.timeLimitSeconds || 300);
-        }).catch((error) => toast.error(error.message));
+      .catch((error) => {
+        const message = error.response?.data?.message || error.message || "Unable to load today's question";
+        api
+          .get("/api/questions/daily")
+          .then(({ data }) => {
+            setData(data);
+            setSeconds(data.question.timeLimitSeconds || 300);
+          })
+          .catch((dailyError) => {
+            toast.error(dailyError.response?.data?.message || dailyError.message || message);
+          });
       });
   }, []);
 

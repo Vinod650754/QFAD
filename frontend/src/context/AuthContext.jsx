@@ -3,12 +3,20 @@ import api from "../api/client";
 
 const AuthContext = createContext(null);
 
+const getStoredToken = () => {
+  try {
+    return window.localStorage.getItem("qotd_token");
+  } catch {
+    return null;
+  }
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("qotd_token");
+    const token = getStoredToken();
     if (!token) {
       setLoading(false);
       return;
@@ -17,7 +25,13 @@ export const AuthProvider = ({ children }) => {
     api
       .get("/api/auth/me")
       .then(({ data }) => setUser(data.user))
-      .catch(() => localStorage.removeItem("qotd_token"))
+      .catch(() => {
+        try {
+          window.localStorage.removeItem("qotd_token");
+        } catch {
+          // no-op
+        }
+      })
       .finally(() => setLoading(false));
   }, []);
 

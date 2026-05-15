@@ -17,7 +17,20 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173", "https://qfad.vercel.app"].filter(Boolean);
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
+  exposedHeaders: ["Authorization"]
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(express.json());
 app.use(helmet());
 app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
