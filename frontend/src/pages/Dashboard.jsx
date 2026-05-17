@@ -1,23 +1,50 @@
 import { motion } from "framer-motion";
 import { Bell, BookOpen, Flame, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../api/client";
 import StatCard from "../components/ui/StatCard";
 import Skeleton from "../components/ui/Skeleton";
+import { useAppData } from "../context/AppDataContext";
 import { useAuth } from "../context/AuthContext";
 
 export default function Dashboard() {
   const { user } = useAuth();
   const [profile, setProfile] = useState(null);
   const [notifications, setNotifications] = useState([]);
+  const [error, setError] = useState("");
+  const { refreshKey, profileSnapshot, setProfileSnapshot } = useAppData();
 
   useEffect(() => {
-    Promise.all([api.get("/api/users/profile"), api.get("/api/users/notifications")]).then(([p, n]) => {
-      setProfile(p.data);
-      setNotifications(n.data.notifications);
-    });
-  }, []);
+    if (profileSnapshot) {
+      setProfile({
+        user: profileSnapshot.user,
+        streak: profileSnapshot.streak,
+        recentXp: profileSnapshot.recentXp || [],
+        answerCount: profileSnapshot.answerCount || 0
+      });
+      setNotifications(profileSnapshot.notifications || []);
+      setProfileSnapshot(null);
+      return;
+    }
 
+    let alive = true;
+    setError("");
+    Promise.all([api.get("/api/users/profile"), api.get("/api/users/notifications")])
+      .then(([p, n]) => {
+        if (!alive) return;
+        setProfile(p.data);
+        setNotifications(n.data.notifications);
+      })
+      .catch((loadError) => {
+        if (alive) setError(loadError.message || "Unable to load dashboard");
+      });
+    return () => {
+      alive = false;
+    };
+  }, [refreshKey, profileSnapshot, setProfileSnapshot]);
+
+  if (error) return <section className="panel text-coral">{error}</section>;
   if (!profile) return <Skeleton rows={5} />;
 
   return (
@@ -27,7 +54,7 @@ export default function Dashboard() {
           <p className="text-sm text-slate-500 dark:text-slate-400">Welcome back</p>
           <h1 className="text-4xl font-black">{user.name}</h1>
         </div>
-        <a className="btn-primary" href="/daily"><BookOpen size={18} /> Today's question</a>
+        <Link className="btn-primary" to="/today"><BookOpen size={18} /> Today's Question</Link>
       </motion.div>
       <div className="grid gap-4 md:grid-cols-3">
         <StatCard label="Total XP" value={profile.user.xp} />
@@ -38,7 +65,7 @@ export default function Dashboard() {
         <section className="panel">
           <h2 className="mb-4 flex items-center gap-2 text-xl font-black"><Sparkles className="text-sun" /> Recent XP</h2>
           <div className="space-y-3">
-            {profile.recentXp.length ? profile.recentXp.map((item) => (
+            {profile.recentXp?.length ? profile.recentXp.map((item) => (
               <div key={item._id} className="flex items-center justify-between rounded-lg bg-slate-50 p-3 dark:bg-slate-800">
                 <span>{item.reason}</span>
                 <span className="font-black text-mint">+{item.points}</span>
@@ -49,12 +76,12 @@ export default function Dashboard() {
         <section className="panel">
           <h2 className="mb-4 flex items-center gap-2 text-xl font-black"><Bell className="text-mint" /> Notifications</h2>
           <div className="space-y-3">
-            {notifications.map((item) => (
+            {notifications.length ? notifications.map((item) => (
               <div key={item._id} className="rounded-lg border border-slate-200 p-3 dark:border-slate-700">
                 <p className="font-semibold">{item.title}</p>
                 <p className="text-sm text-slate-500 dark:text-slate-400">{item.message}</p>
               </div>
-            ))}
+            )) : <p className="text-slate-500">No notifications yet.</p>}
           </div>
         </section>
       </div>

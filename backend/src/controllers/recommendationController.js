@@ -1,10 +1,14 @@
-import { buildUserFeatures, recommendQuestion } from "../services/mlService.js";
+import { buildUserFeatures, recommendQuestion } from "../services/recommendationService.js";
 
 export const nextQuestion = async (req, res, next) => {
   try {
     const recommendation = await recommendQuestion(req.user._id);
     if (!recommendation.question) {
-      return res.status(404).json({ message: recommendation.reason || "No question available" });
+      return res.json({
+        ...recommendation,
+        question: null,
+        message: recommendation.reason || "No adaptive question available."
+      });
     }
     res.json(recommendation);
   } catch (err) {

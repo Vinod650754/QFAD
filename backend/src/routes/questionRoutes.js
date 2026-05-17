@@ -14,6 +14,7 @@ import { validate } from "../middleware/validate.js";
 const router = express.Router();
 
 router.get("/daily", protect, getDailyQuestion);
+router.get("/today", protect, getDailyQuestion);
 router.get("/", protect, requireAdmin, listQuestions);
 router.post("/", protect, requireAdmin, questionRules, validate, createQuestion);
 router.put("/:id", protect, requireAdmin, idRule, validate, updateQuestion);

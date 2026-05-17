@@ -51,12 +51,12 @@ export const recommendQuestion = async (userId) => {
   const candidates = await Question.find({
     _id: { $nin: answeredIds },
     isPublished: true,
+    type: "adaptive",
     scheduledFor: { $lte: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) }
   }).lean();
 
-  if (!candidates.length) return { question: null, features, reason: "No unanswered published questions" };
+  if (!candidates.length) return { question: null, features, reason: "No unanswered adaptive questions" };
 
-  // Use rule-based heuristics instead of ML model
   const targetDifficulty = chooseDifficulty(features);
   const targetTopic = features.weakTopics?.[0] || "General";
   const ranked = rankCandidates(candidates, { topic: targetTopic, difficulty: targetDifficulty }, features);

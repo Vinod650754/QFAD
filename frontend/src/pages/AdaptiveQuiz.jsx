@@ -1,5 +1,5 @@
 import DailyQuestion from "./DailyQuestion";
 
 export default function AdaptiveQuiz() {
-  return <DailyQuestion />;
+  return <DailyQuestion mode="adaptive" />;
 }

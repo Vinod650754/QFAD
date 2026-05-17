@@ -32,7 +32,9 @@ const normalizeQuestion = (row, userId) => ({
   correctAnswer: row.correctAnswer || row.correct_answer || row.answer,
   explanation: row.explanation || "",
   scheduledFor: row.scheduledFor ? new Date(row.scheduledFor) : new Date(),
+  scheduledDate: row.scheduledDate ? new Date(row.scheduledDate) : row.scheduledFor ? new Date(row.scheduledFor) : new Date(),
   xpReward: Number(row.xpReward || 20),
+  type: row.type || "adaptive",
   source: row.source || "dataset",
   createdBy: userId
 });

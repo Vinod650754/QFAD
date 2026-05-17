@@ -15,6 +15,8 @@ const blankQuestion = {
   correctAnswer: "",
   explanation: "",
   scheduledFor: new Date().toISOString().slice(0, 10),
+  type: "daily",
+  source: "admin",
   xpReward: 20,
   timeLimitSeconds: 300
 };
@@ -42,7 +44,8 @@ export default function Admin() {
       await api.post("/api/questions", {
         ...form,
         options: form.options.split(",").map((option) => option.trim()).filter(Boolean),
-        scheduledFor: new Date(form.scheduledFor)
+        scheduledFor: new Date(form.scheduledFor),
+        scheduledDate: new Date(form.scheduledFor)
       });
       setForm(blankQuestion);
       toast.success("Question scheduled");
@@ -95,6 +98,11 @@ export default function Admin() {
           <select className="field" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>{["Coding", "Aptitude", "GK", "English", "Science"].map((x) => <option key={x}>{x}</option>)}</select>
           <select className="field" value={form.difficulty} onChange={(e) => setForm({ ...form, difficulty: e.target.value })}>{["Easy", "Medium", "Hard"].map((x) => <option key={x}>{x}</option>)}</select>
           <input className="field" placeholder="Topic" value={form.topic || ""} onChange={(e) => setForm({ ...form, topic: e.target.value })} />
+          <select className="field" value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value, source: e.target.value === "daily" ? "admin" : "generated" })}>
+            <option value="daily">Daily</option>
+            <option value="adaptive">Adaptive</option>
+            <option value="topic">Topic</option>
+          </select>
           <textarea className="field lg:col-span-3" placeholder="Prompt" value={form.prompt} onChange={(e) => setForm({ ...form, prompt: e.target.value })} required />
           <input className="field" placeholder="Options comma separated" value={form.options} onChange={(e) => setForm({ ...form, options: e.target.value })} />
           <input className="field" placeholder="Correct answer" value={form.correctAnswer} onChange={(e) => setForm({ ...form, correctAnswer: e.target.value })} required />
@@ -129,7 +137,7 @@ export default function Admin() {
             {questions.map((item) => (
               <div key={item._id} className="rounded-lg bg-slate-50 p-3 dark:bg-slate-800">
                 <p className="font-semibold">{item.title}</p>
-                <p className="text-xs text-slate-500">{item.category} / {new Date(item.scheduledFor).toLocaleDateString()}</p>
+                <p className="text-xs text-slate-500">{item.type || "daily"} / {item.category} / {new Date(item.scheduledFor).toLocaleDateString()}</p>
               </div>
             ))}
           </div>

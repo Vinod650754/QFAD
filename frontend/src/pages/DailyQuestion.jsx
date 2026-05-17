@@ -5,35 +5,50 @@ import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../api/client";
 import Skeleton from "../components/ui/Skeleton";
+import { useAppData } from "../context/AppDataContext";
 import { useAuth } from "../context/AuthContext";
 
-export default function DailyQuestion() {
+export default function DailyQuestion({ mode = "daily" }) {
   const [data, setData] = useState(null);
   const [answer, setAnswer] = useState("");
   const [seconds, setSeconds] = useState(0);
   const [result, setResult] = useState(null);
+  const [error, setError] = useState("");
   const { setUser } = useAuth();
+  const { refreshAppData } = useAppData();
 
   useEffect(() => {
+    let alive = true;
+    setData(null);
+    setError("");
+    setAnswer("");
+    setResult(null);
+
+    const endpoint = mode === "adaptive" ? "/api/recommendations/next" : "/api/questions/today";
     api
-      .get("/api/recommendations/next")
+      .get(endpoint)
       .then(({ data }) => {
-        setData({ question: data.question, recommendationReason: data.reason, answered: false });
-        setSeconds(data.question.timeLimitSeconds || 300);
+        if (!alive) return;
+        const nextData =
+          mode === "adaptive"
+            ? { question: data.question, recommendationReason: data.reason, answered: false }
+            : data;
+        setData(nextData);
+        if (nextData.question) setSeconds(nextData.question.timeLimitSeconds || 300);
       })
-      .catch((error) => {
-        const message = error.response?.data?.message || error.message || "Unable to load today's question";
-        api
-          .get("/api/questions/daily")
-          .then(({ data }) => {
-            setData(data);
-            setSeconds(data.question.timeLimitSeconds || 300);
-          })
-          .catch((dailyError) => {
-            toast.error(dailyError.response?.data?.message || dailyError.message || message);
-          });
+      .catch((loadError) => {
+        if (!alive) return;
+        const message =
+          mode === "daily"
+            ? "No question available today."
+            : loadError.message || "No adaptive question available.";
+        setError(message);
+        toast.error(message);
       });
-  }, []);
+    return () => {
+      alive = false;
+    };
+  }, [mode]);
 
   useEffect(() => {
     if (!seconds || result || data?.answered) return undefined;
@@ -43,7 +58,22 @@ export default function DailyQuestion() {
 
   const time = useMemo(() => `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`, [seconds]);
 
-  if (!data) return <Skeleton rows={6} />;
+  if (!data && !error) return <Skeleton rows={6} />;
+  if (error || !data?.question) {
+    return (
+      <section className="panel text-center">
+        <p className="text-sm font-semibold text-mint">{mode === "adaptive" ? "Adaptive" : "Today"}</p>
+        <h1 className="mt-2 text-3xl font-black">
+          {mode === "adaptive" ? "No adaptive question available." : "No question available today."}
+        </h1>
+        <p className="mx-auto mt-3 max-w-xl text-slate-500 dark:text-slate-400">
+          {mode === "adaptive"
+            ? "New adaptive questions will appear here once they are imported or generated."
+            : "An admin can schedule a daily question for today from the admin panel."}
+        </p>
+      </section>
+    );
+  }
   const { question } = data;
 
   const submit = async (event) => {
@@ -52,7 +82,13 @@ export default function DailyQuestion() {
       const elapsed = (question.timeLimitSeconds || 300) - seconds;
       const response = await api.post("/api/answers", { questionId: question._id, answer, timeSpentSeconds: elapsed });
       setResult(response.data);
-      setUser((user) => user ? { ...user, xp: user.xp + response.data.xpEarned, badges: response.data.badges } : user);
+      setData((current) => current ? { ...current, answered: true, answer: response.data.answer } : current);
+      setUser((user) =>
+        user
+          ? { ...user, xp: response.data.profile?.user?.xp ?? user.xp + response.data.xpEarned, badges: response.data.badges }
+          : user
+      );
+      refreshAppData(response.data.profile);
       if (response.data.isCorrect) confetti({ particleCount: 120, spread: 70, origin: { y: 0.7 } });
       toast.success(`+${response.data.xpEarned} XP earned`);
     } catch (error) {
@@ -66,7 +102,8 @@ export default function DailyQuestion() {
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-sm font-semibold text-mint">{question.category} / {question.difficulty}</p>
-            <h1 className="text-3xl font-black">{question.title}</h1>
+            <h1 className="text-3xl font-black">{mode === "adaptive" ? "Adaptive Practice" : "Today's Question"}</h1>
+            <p className="mt-1 text-lg font-semibold">{question.title}</p>
             {data.recommendationReason && <p className="mt-1 text-sm text-slate-500">{data.recommendationReason}</p>}
           </div>
           <div className="btn-secondary"><Clock size={18} /> {time}</div>

@@ -31,6 +31,7 @@ export default function App() {
       >
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/daily" element={<DailyQuestion />} />
+        <Route path="/today" element={<DailyQuestion />} />
         <Route path="/adaptive" element={<AdaptiveQuiz />} />
         <Route path="/history" element={<History />} />
         <Route path="/leaderboard" element={<Leaderboard />} />

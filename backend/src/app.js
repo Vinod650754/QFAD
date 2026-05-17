@@ -17,10 +17,15 @@ dotenv.config();
 
 const app = express();
 
-const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173", "https://qfad.vercel.app"].filter(Boolean);
+const allowedOrigins = [
+  ...(process.env.CLIENT_URL || "").split(",").map((origin) => origin.trim()).filter(Boolean),
+  "http://localhost:5173",
+  "http://localhost:4173",
+  "https://qfad.vercel.app"
+];
 const corsOptions = {
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.includes(origin) || /^https:\/\/.+\.vercel\.app$/.test(origin)) {
       return callback(null, true);
     }
     callback(new Error("Not allowed by CORS"));

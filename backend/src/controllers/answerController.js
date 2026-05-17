@@ -35,7 +35,7 @@ export const submitAnswer = async (req, res, next) => {
 
     const user = await User.findById(req.user._id);
     user.xp += xpEarned;
-    awardBadges(user, xpEarned);
+    awardBadges(user);
     await user.save();
 
     const streak = await updateStreak(req.user._id);
@@ -51,6 +51,11 @@ export const submitAnswer = async (req, res, next) => {
       message: `You earned ${xpEarned} XP.`,
       type: isCorrect ? "success" : "info"
     });
+    const [recentXp, notifications, answerCount] = await Promise.all([
+      XpHistory.find({ user: req.user._id }).sort({ createdAt: -1 }).limit(10),
+      Notification.find({ user: req.user._id }).sort({ createdAt: -1 }).limit(20),
+      Answer.countDocuments({ user: req.user._id })
+    ]);
 
     res.status(201).json({
       answer: savedAnswer,
@@ -59,7 +64,14 @@ export const submitAnswer = async (req, res, next) => {
       explanation: question.explanation,
       correctAnswer: question.correctAnswer,
       streak,
-      badges: user.badges
+      badges: user.badges,
+      profile: {
+        user,
+        streak,
+        recentXp,
+        notifications,
+        answerCount
+      }
     });
   } catch (err) {
     next(err);
@@ -97,12 +109,12 @@ const updateStreak = async (userId) => {
   return streak;
 };
 
-const awardBadges = (user, earned) => {
+const awardBadges = (user) => {
   const owned = new Set(user.badges.map((badge) => badge.key));
   const badges = [
-    { key: "first_xp", label: "First XP", ok: user.xp + earned > 0 },
-    { key: "hundred_club", label: "100 XP Club", ok: user.xp + earned >= 100 },
-    { key: "five_hundred", label: "500 XP Spark", ok: user.xp + earned >= 500 }
+    { key: "first_xp", label: "First XP", ok: user.xp > 0 },
+    { key: "hundred_club", label: "100 XP Club", ok: user.xp >= 100 },
+    { key: "five_hundred", label: "500 XP Spark", ok: user.xp >= 500 }
   ];
 
   badges.forEach((badge) => {

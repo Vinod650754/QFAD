@@ -36,6 +36,9 @@ const run = async () => {
       correctAnswer: "push()",
       explanation: "push() mutates the array by appending items and returns the new length.",
       scheduledFor: today,
+      scheduledDate: today,
+      type: "daily",
+      source: "admin",
       xpReward: 25,
       createdBy: admin._id
     },
@@ -49,6 +52,9 @@ const run = async () => {
       correctAnswer: "H2O",
       explanation: "A water molecule contains two hydrogen atoms and one oxygen atom.",
       scheduledFor: new Date(today.getTime() + 24 * 60 * 60 * 1000),
+      scheduledDate: new Date(today.getTime() + 24 * 60 * 60 * 1000),
+      type: "daily",
+      source: "admin",
       xpReward: 20,
       createdBy: admin._id
     },
@@ -62,6 +68,9 @@ const run = async () => {
       correctAnswer: "105",
       explanation: "One pen costs 15, so seven pens cost 7 x 15 = 105.",
       scheduledFor: today,
+      scheduledDate: today,
+      type: "adaptive",
+      source: "generated",
       xpReward: 30,
       createdBy: admin._id
     }
