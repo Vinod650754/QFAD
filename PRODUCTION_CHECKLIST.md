@@ -25,21 +25,12 @@ MONGO_URI=<MongoDB Atlas connection string>
 JWT_SECRET=<Secure random string>
 JWT_EXPIRES_IN=7d
 CLIENT_URL=https://qfad.vercel.app
-ML_SERVICE_URL=https://qfad-ml.onrender.com
 SMTP_HOST=<your smtp host>
 SMTP_PORT=587
 SMTP_USER=<your smtp user>
 SMTP_PASS=<your smtp password>
 EMAIL_FROM=Question For The Day <hello@example.com>
 ```
-
-### ML Service (Render)
-- [ ] Repository `ml-service/` pushed to GitHub
-- [ ] Build command set to: `pip install -r requirements.txt`
-- [ ] Start command set to: `uvicorn app:app --host 0.0.0.0 --port 10000`
-- [ ] `python-3.11.9` specified in `runtime.txt`
-- [ ] `models/model.pkl` exists in repository
-- [ ] Trained model committed to Git: `git add ml-service/models/model.pkl && git commit -m "add trained model"`
 
 ### MongoDB Atlas
 - [ ] Cluster created
@@ -58,10 +49,6 @@ EMAIL_FROM=Question For The Day <hello@example.com>
 ### Test Backend
 - [ ] GET https://qfad.onrender.com/ returns success message
 - [ ] GET https://qfad.onrender.com/health returns `{status: "ok"}`
-
-### Test ML Service
-- [ ] GET https://qfad-ml.onrender.com/health returns model status
-- [ ] POST https://qfad-ml.onrender.com/predict returns valid prediction
 
 ### Test Auth Flow
 ```bash
@@ -104,16 +91,12 @@ MONGO_URI = (Get from MongoDB Atlas)
 JWT_SECRET = (Generate using: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")
 JWT_EXPIRES_IN = 7d
 CLIENT_URL = https://qfad.vercel.app
-ML_SERVICE_URL = https://qfad-ml.onrender.com
 SMTP_HOST = (Email service SMTP host)
 SMTP_PORT = 587
 SMTP_USER = (Email service user)
 SMTP_PASS = (Email service password)
 EMAIL_FROM = Question For The Day <hello@example.com>
 ```
-
-### ML Service (Render Dashboard → Environment)
-No special environment variables needed beyond what's in runtime.txt and requirements.txt
 
 ## ✅ Troubleshooting
 
@@ -133,14 +116,7 @@ No special environment variables needed beyond what's in runtime.txt and require
 - [ ] Check `models/model.pkl` exists in repository
 - [ ] Run `python train.py` locally to generate model
 - [ ] Commit and push model.pkl
-- [ ] Rebuild ML service in Render
-- [ ] Check ML service logs
-
-### CORS Errors
-- [ ] Backend has `app.use(cors())` which allows all origins
-- [ ] Check browser console for actual error
-- [ ] Verify request headers
-
+- [ 
 ### JWT Token Errors
 - [ ] Check JWT_SECRET matches between requests
 - [ ] Check token format is `Bearer <token>`

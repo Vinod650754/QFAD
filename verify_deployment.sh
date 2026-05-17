@@ -4,12 +4,10 @@
 # This script tests all critical endpoints to ensure deployment works correctly
 
 BACKEND_URL="${1:-https://qfad.onrender.com}"
-ML_URL="${2:-https://qfad-ml.onrender.com}"
 
 echo "🔍 API Integration Verification"
 echo "================================"
 echo "Backend: $BACKEND_URL"
-echo "ML Service: $ML_URL"
 echo ""
 
 # Color codes
@@ -34,17 +32,6 @@ if [ $response -eq 200 ]; then
   echo -e "${GREEN}✓ Backend health endpoint working${NC}"
 else
   echo -e "${RED}✗ Backend health endpoint failed (HTTP $response)${NC}"
-fi
-
-# Test ML Service Health
-echo ""
-echo "Testing ML Service Health Endpoints..."
-echo "1. GET /health"
-response=$(curl -s -o /dev/null -w "%{http_code}" $ML_URL/health)
-if [ $response -eq 200 ]; then
-  echo -e "${GREEN}✓ ML service health endpoint working${NC}"
-else
-  echo -e "${RED}✗ ML service health endpoint failed (HTTP $response)${NC}"
 fi
 
 # Test Auth Signup

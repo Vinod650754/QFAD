@@ -6,7 +6,6 @@ A production-ready full stack adaptive learning app where users answer daily AI-
 
 - Frontend: React, Vite, Tailwind CSS, Axios, React Router DOM, Context API, Framer Motion
 - Backend: Node.js, Express.js, JWT, bcrypt, Mongoose
-- ML Service: Python FastAPI, Scikit-learn-ready recommendation architecture
 - Database: MongoDB Atlas
 - Deployment: Vercel frontend, Render or Railway backend
 
@@ -30,9 +29,6 @@ Question_For_the_day/
       context/         Auth and theme providers
       pages/           App pages
       shared/          Shared page shells
-  ml-service/
-    app/               FastAPI recommendation API
-    requirements.txt   Python dependencies
   datasets/
     sample_questions.json
   docs/
@@ -50,9 +46,10 @@ cd ../frontend && npm install
 2. Configure environment files:
 
 ```bash
+cp backend/.env.example backe:
+
+```bash
 cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env
-cp ml-service/.env.example ml-service/.env
 ```
 
 3. Set `backend/.env`:
@@ -63,23 +60,9 @@ MONGO_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/question_of_the_
 JWT_SECRET=<long-random-secret>
 JWT_EXPIRES_IN=7d
 CLIENT_URL=http://localhost:5173
-ML_SERVICE_URL=http://localhost:8000
 ```
 
-4. Run the ML service:
-
-```bash
-cd ml-service
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-```
-
-5. Seed sample data after MongoDB Atlas is configured:
-
-```bash
-cd backend
+4d backend
 npm run seed
 npm run seed:demo
 ```
@@ -111,7 +94,7 @@ npm run dev
 ```
 
 Open `http://localhost:5173`.
-
+5
 ## Database Schemas
 
 - `User`: name, email, hashed password, role, XP, badges, avatar color, active status, reset password fields
@@ -181,26 +164,6 @@ curl -X POST http://localhost:5000/api/auth/login \
 ```
 
 Then use the returned token against `/api/questions/daily`, `/api/users/profile`, and `/api/admin/analytics`.
-
-ML service smoke test:
-
-```bash
-curl http://localhost:8000/health
-```
-
-ML prediction and training:
-
-```bash
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d "{\"accuracy\":0.7,\"streak\":3,\"weak_topics\":[\"Ratios\"],\"solved_difficulty\":2,\"avg_time\":60}"
-```
-
-```bash
-curl -X POST http://localhost:8000/train \
-  -H "Content-Type: application/json" \
-  -d "{\"rows\":[]}"
-```
 
 Automated public dataset pipeline:
 
@@ -277,8 +240,7 @@ Kaggle/HuggingFace datasets should be exported or transformed to JSON/CSV fields
 2. Set root directory to `ml-service`.
 3. Build command: `pip install -r requirements.txt`
 4. Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-5. Deploy and verify `/health`.
-
+5. De
 ## Production Notes
 
 - Backend calls the ML service through `ML_SERVICE_URL` using Axios with retry and falls back to deterministic recommendation logic if ML is unavailable.
@@ -292,12 +254,8 @@ Kaggle/HuggingFace datasets should be exported or transformed to JSON/CSV fields
 ```bash
 git init
 git add .
-git commit -m "Initial Question of the Day app"
-git branch -M main
-git remote add origin https://github.com/<your-user>/<your-repo>.git
-git push -u origin main
-```
+gi Production Notes
 
-## Notes
-
-Email notifications are supported through SMTP. If SMTP variables are not set, the backend logs that email was skipped and still keeps in-app notifications working.
+- Backend uses rule-based heuristics for question recommendations (no external ML service required).
+- Recommendation algorithm prioritizes weak topics, adjusts difficulty based on user accuracy and streak, and ranks candidates by topic/difficulty match.
+- Backend smoke tests can be run with `cd backend && npm run test:smoke` after the services are running

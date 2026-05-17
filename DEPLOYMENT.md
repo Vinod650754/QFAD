@@ -23,27 +23,12 @@ MONGO_URI=<Your MongoDB Atlas connection string>
 JWT_SECRET=<Your secure JWT secret - long random string>
 JWT_EXPIRES_IN=7d
 CLIENT_URL=https://qfad.vercel.app
-ML_SERVICE_URL=https://qfad-ml.onrender.com
 SMTP_HOST=<Email service SMTP host>
 SMTP_PORT=587
 SMTP_USER=<Email service user>
 SMTP_PASS=<Email service password>
 EMAIL_FROM="Question For The Day <hello@example.com>"
 ```
-
----
-
-## ML Service (Render)
-
-Set these environment variables in Render Dashboard:
-```
-PYTHON_VERSION=3.11.9
-```
-
-The ML service will run at: https://qfad-ml.onrender.com
-
-Health check: GET https://qfad-ml.onrender.com/health
-Prediction: POST https://qfad-ml.onrender.com/predict
 
 ---
 
@@ -124,11 +109,27 @@ Prediction: POST https://qfad-ml.onrender.com/predict
 
 ## Backend → ML Service Communication
 
-1. When user requests recommendation, backend calls ML service `/predict`
-2. ML service URL: https://qfad-ml.onrender.com
-3. Request includes user features (accuracy, streak, weak_topics, etc.)
-4. Response includes recommended difficulty and topic
-5. Backend ranks candidates and returns question
+1. Backend uses rule-based heuristics for recommendations (no external ML service)
+6. Response returned to frontend
+
+---
+
+## Backend → Database Communication
+
+1. Backend connects to MongoDB Atlas via MONGO_URI
+2. Collections: users, questions, answers, streaks, notifications, xphistories
+
+---
+
+## Backend Recommendations System
+
+1. When user requests recommendation via `/api/recommendations/next`
+2. Backend calculates user features: accuracy, streak, weak topics, solved difficulty, average time
+3. Backend uses rule-based heuristics to select next question:
+   - Prioritizes weak topics
+   - Adjusts difficulty based on accuracy and streak
+   - Ranks candidates by topic match, difficulty match, and publish status
+4. Returns ranked question with explanation
 
 ---
 
@@ -136,22 +137,7 @@ Prediction: POST https://qfad-ml.onrender.com/predict
 
 1. **Frontend Health**: https://qfad.vercel.app
 2. **Backend Health**: https://qfad.onrender.com/
-3. **Backend Health Check**: https://qfad.onrender.com/health
-4. **ML Service Health**: https://qfad-ml.onrender.com/health
-
-Test signup flow:
-```bash
-curl -X POST https://qfad.onrender.com/api/auth/signup \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test","email":"test@example.com","password":"password123"}'
-```
-
-Test login flow:
-```bash
-curl -X POST https://qfad.onrender.com/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","password":"password123"}'
-```
+3. **Backend Health Check**: https://qfad
 
 ---
 
@@ -185,8 +171,3 @@ curl -X POST https://qfad.onrender.com/api/auth/login \
 - Build: `npm install`
 - Start: `npm start`
 - Deploy: `git push` (auto-deploys from GitHub)
-
-### ML Service (Render)
-- Build: `pip install -r requirements.txt`
-- Start: `uvicorn app:app --host 0.0.0.0 --port 10000`
-- Deploy: `git push ml-service/` (auto-deploys from GitHub)

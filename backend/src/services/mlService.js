@@ -1,4 +1,3 @@
-import axios from "axios";
 import Answer from "../models/Answer.js";
 import Question from "../models/Question.js";
 import Streak from "../models/Streak.js";
@@ -57,47 +56,16 @@ export const recommendQuestion = async (userId) => {
 
   if (!candidates.length) return { question: null, features, reason: "No unanswered published questions" };
 
-  const mlPrediction = await callMlService(features);
-  if (mlPrediction?.topic || mlPrediction?.difficulty) {
-    const ranked = rankCandidates(candidates, mlPrediction, features);
-    if (ranked[0]?.question) {
-      return { question: ranked[0].question, features, reason: mlPrediction.reason || "ML prediction" };
-    }
-  }
-
+  // Use rule-based heuristics instead of ML model
   const targetDifficulty = chooseDifficulty(features);
-  const ranked = rankCandidates(candidates, { topic: features.weakTopics[0], difficulty: targetDifficulty }, features);
+  const targetTopic = features.weakTopics?.[0] || "General";
+  const ranked = rankCandidates(candidates, { topic: targetTopic, difficulty: targetDifficulty }, features);
 
   return {
-    question: ranked[0].question,
+    question: ranked[0]?.question || candidates[0],
     features,
-    reason: `Fallback recommendation using ${targetDifficulty} difficulty and weak-topic priority`
+    reason: `Recommended ${targetDifficulty} difficulty on ${targetTopic} based on your performance`
   };
-};
-
-const callMlService = async (features) => {
-  const baseUrl = process.env.ML_SERVICE_URL;
-  if (!baseUrl) return null;
-
-  for (let attempt = 1; attempt <= 2; attempt += 1) {
-    try {
-      const { data } = await axios.post(
-        `${baseUrl}/predict`,
-        {
-          accuracy: features.accuracy,
-          streak: features.streak,
-          weak_topics: features.weakTopics,
-          solved_difficulty: features.solvedDifficulty,
-          avg_time: features.avgTime
-        },
-        { timeout: 5000 }
-      );
-      return data;
-    } catch {
-      if (attempt === 2) return null;
-      await new Promise((resolve) => setTimeout(resolve, 300));
-    }
-  }
 };
 
 const rankCandidates = (candidates, target, features) =>
